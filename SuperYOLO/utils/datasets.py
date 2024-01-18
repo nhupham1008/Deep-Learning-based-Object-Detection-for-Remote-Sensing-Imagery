@@ -372,7 +372,7 @@ def img2label_paths(img_paths):
 
 def img2ir_paths(img_paths): #zjq
     # Define ir image paths as a function of image paths
-    return [x.replace('co', 'ir') for x in img_paths] #replace('.' + x.split('.')[-1], '.txt')
+    return [x.replace('co.png', 'ir.png') for x in img_paths] #replace('.' + x.split('.')[-1], '.txt')
 
 def img2img_512_paths(img_paths): #zjq
     # Define ir image paths as a function of image paths
@@ -405,8 +405,7 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
 
         # Check cache
         self.label_files = img2label_paths(self.img_files)  # labels
-        ## taindp: fixbug
-        # self.ir_files = img2ir_paths(self.img_files)
+        self.ir_files = img2ir_paths(self.img_files)
         self.ir_files = self.img_files
         cache_path = Path(self.label_files[0]).parent.with_suffix('.cache')  # cached labels
         if cache_path.is_file():
